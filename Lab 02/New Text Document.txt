@@ -1,0 +1,122 @@
+import os
+
+# Define the target directory path
+target_dir = r"C:\Users\Rezwan Shajib\Documents\MATLAB\Simulation and Modeling\Lab 02\Module 5"
+
+# Ensure the directory exists (creates it if it doesn't)
+os.makedirs(target_dir, exist_ok=True)
+
+# Dictionary containing the filenames as keys and the MATLAB code as values
+matlab_files = {
+    "Untitled4.m": """% Sequential Control Execution
+a = 5;
+b = 10;
+c = a + b;
+disp(c);
+
+% Basic Decision Making
+age = 20;
+if age >= 18
+    disp('Adult');
+end
+""",
+    
+    "guess_my_number.m": """function guess_my_number(x)
+    if x == 42
+        fprintf('Congrats! You guessed my number!\\n');
+    elseif x < 42
+        fprintf('Too small. Try again\\n');
+    else
+        fprintf('Too big. Try again.\\n');
+    end
+end
+""",
+    
+    "day_of_week.m": """function day_of_week(n)
+    if n == 1
+        fprintf('Sunday, ');
+        day_type = 1;
+    elseif n == 6
+        fprintf('Friday, ');
+        day_type = 2;
+    elseif n == 7
+        fprintf('Saturday, ');
+        day_type = 2;
+    else
+        fprintf('Number must be from 1 to 7.\\n');
+        return
+    end
+
+    if day_type == 1
+        fprintf('which is a week day\\n');
+    else
+        fprintf('which is a weekend day\\n');
+    end
+end
+""",
+    
+    "order3.m": """function a = order3(x, y, z)
+    if x <= y && y <= z
+        a = 1;
+    elseif x >= y && y >= z
+        a = -1;
+    else
+        a = 0;
+    end
+end
+""",
+    
+    "not_smallest.m": """function a = not_smallest(x, y, z)
+    if x >= y || x >= z
+        a = 1;
+    else
+        a = 0;
+    end
+end
+""",
+    
+    "ultimate_question_nested2.m": """function ultimate_question_nested2(x)
+    if x <= 42
+        if x == 42
+            fprintf('Wow! You answered the question.\\n');
+        else
+            fprintf('Too small. Try again.\\n');
+        end
+    else
+        fprintf('Too big. Try again.\\n');
+    end
+end
+""",
+    
+    "multable.m": """function [table, summa] = multable(n, m)
+    if nargin < 1
+        error('must have at least one input argument');
+    end
+    
+    if nargin < 2
+        m = n;
+    elseif ~isscalar(m) || m < 1 || m ~= fix(m)
+        error('m needs to be a positive integer');
+    end
+    
+    if ~isscalar(n) || n < 1 || n ~= fix(n)
+        error('n needs to be a positive integer');
+    end
+    
+    table = (1:n)' * (1:m);
+    
+    if nargout == 2
+        summa = sum(table(:));
+    end
+end
+"""
+}
+
+# Iterate through the dictionary and write each file
+for filename, code in matlab_files.items():
+    filepath = os.path.join(target_dir, filename)
+    with open(filepath, 'w', encoding='utf-8') as file:
+        file.write(code)
+    print(f"Successfully created: {filepath}")
+
+print("\nAll Module 5 files have been written to your directory.")

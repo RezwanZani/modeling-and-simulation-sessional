@@ -1,0 +1,10 @@
+clear; clc; close all;
+
+H_true = 10000; % true altitude
+mu = 0;         % mean sensor error
+sigma = 25;     % Standard Deviation of sensors error
+N = 1000;       % Number of alt meas.
+
+rng(1);
+sensor_error = mu + sigma * randn(N, 1); % Generate 1000 Normally distributed rand numbers and calculate the error
+
